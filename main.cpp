@@ -1,8 +1,8 @@
-#include <stdio.h>
+#include <iostream>
 
-int main(int, char **)
+int main()
 {
-    printf("Hello, from STA!\n");
+    std::cout << "Hello, World!" << std::endl;
 
     return 0;
 }
