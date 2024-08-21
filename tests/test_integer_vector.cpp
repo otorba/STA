@@ -27,6 +27,18 @@ TEST(IntegerVectorTest, PushBackAndSize)
 	EXPECT_FALSE(vec.empty());
 }
 
+// Test growing
+TEST(IntegerVectorTest, Growing)
+{
+	IntegerVector vec;
+	for (int i = 0; i < 100; i++)
+	{
+		vec.push_back(i);
+	}
+	EXPECT_EQ(vec.size(), 100);
+	EXPECT_FALSE(vec.empty());
+}
+
 // Test pop_back
 TEST(IntegerVectorTest, PopBack)
 {
@@ -36,6 +48,22 @@ TEST(IntegerVectorTest, PopBack)
 	vec.pop_back();
 	EXPECT_EQ(vec.size(), 1);
 	EXPECT_EQ(vec.at(0), 1);
+}
+
+// Test shrinking
+TEST(IntegerVectorTest, Shrinking)
+{
+	IntegerVector vec;
+	for (int i = 0; i < 100; i++)
+	{
+		vec.push_back(i);
+	}
+	for (int i = 0; i < 90; i++)
+	{
+		vec.pop_back();
+	}
+	EXPECT_EQ(vec.size(), 10);
+	EXPECT_FALSE(vec.empty());
 }
 
 // Test at
