@@ -6,16 +6,16 @@
 // Constructors
 IntegerVector::IntegerVector()
 {
-	this->n_Allocated = BASE_SIZE;
-	this->n_Used = 0;
-	this->m_data = new int[this->n_Allocated];
+	this->m_nAllocated = BASE_SIZE;
+	this->m_nUsed = 0;
+	this->m_data = new int[this->m_nAllocated];
 }
 
 IntegerVector::IntegerVector(int size)
 {
-	this->n_Allocated = size;
-	this->n_Used = 0;
-	this->m_data = new int[this->n_Allocated];
+	this->m_nAllocated = size;
+	this->m_nUsed = 0;
+	this->m_data = new int[this->m_nAllocated];
 }
 
 // Destructor
@@ -27,27 +27,27 @@ IntegerVector::~IntegerVector()
 // Copy constructor
 IntegerVector::IntegerVector(const IntegerVector &other)
 {
-	this->n_Allocated = other.n_Allocated;
-	this->n_Used = other.n_Used;
-	this->m_data = new int[this->n_Allocated];
-	std::memcpy(this->m_data, other.m_data, other.n_Used * sizeof(int));
+	this->m_nAllocated = other.m_nAllocated;
+	this->m_nUsed = other.m_nUsed;
+	this->m_data = new int[this->m_nAllocated];
+	std::memcpy(this->m_data, other.m_data, other.m_nUsed * sizeof(int));
 }
 
 // Accessors
 int IntegerVector::size() const
 {
-	return this->n_Used;
+	return this->m_nUsed;
 }
 
 bool IntegerVector::empty() const
 {
-	return this->n_Used == 0;
+	return this->m_nUsed == 0;
 }
 
 int &IntegerVector::at(int index)
 {
 	// Check if the index is out of bounds
-	if (index < 0 || index >= this->n_Used)
+	if (index < 0 || index >= this->m_nUsed)
 	{
 		throw std::out_of_range("Index out of bounds");
 	}
@@ -62,7 +62,7 @@ const int &IntegerVector::at(int index) const
 
 void IntegerVector::print() const
 {
-	for (int i = 0; i < this->n_Used; i++)
+	for (int i = 0; i < this->m_nUsed; i++)
 	{
 		std::cout << this->m_data[i] << " ";
 	}
@@ -73,40 +73,40 @@ void IntegerVector::print() const
 void IntegerVector::push_back(int value)
 {
 	// grow logic
-	if (this->n_Used == this->n_Allocated)
+	if (this->m_nUsed == this->m_nAllocated)
 	{
-		int newSize = n_Allocated * 2;
+		int newSize = m_nAllocated * 2;
 		int *pNewArray = new int[newSize];
 
-		std::memcpy(pNewArray, this->m_data, this->n_Used * sizeof(int));
+		std::memcpy(pNewArray, this->m_data, this->m_nUsed * sizeof(int));
 
-		this->n_Allocated = newSize;
+		this->m_nAllocated = newSize;
 		delete[] this->m_data;
 		this->m_data = pNewArray;
 	}
 
-	this->m_data[this->n_Used++] = value;
+	this->m_data[this->m_nUsed++] = value;
 }
 
 void IntegerVector::pop_back()
 {
-	if (this->n_Used == 0)
+	if (this->m_nUsed == 0)
 	{
 		throw std::out_of_range("Cannot pop from an empty vector");
 	}
 
-	this->m_data[this->n_Used - 1] = 0;
-	this->n_Used--;
+	this->m_data[this->m_nUsed - 1] = 0;
+	this->m_nUsed--;
 
 	// shrink logic
-	if (this->n_Used < this->n_Allocated / 2 && this->n_Allocated > this->BASE_SIZE)
+	if (this->m_nUsed < this->m_nAllocated / 2 && this->m_nAllocated > this->BASE_SIZE)
 	{
-		int newSize = n_Allocated / 2;
+		int newSize = m_nAllocated / 2;
 		int *pNewArray = new int[newSize];
 
-		std::memcpy(pNewArray, this->m_data, this->n_Used * sizeof(int));
+		std::memcpy(pNewArray, this->m_data, this->m_nUsed * sizeof(int));
 
-		this->n_Allocated = newSize;
+		this->m_nAllocated = newSize;
 		delete[] this->m_data;
 		this->m_data = pNewArray;
 	}
@@ -114,8 +114,24 @@ void IntegerVector::pop_back()
 
 void IntegerVector::clear()
 {
-	this->n_Used = 0;
-	this->n_Allocated = BASE_SIZE;
+	this->m_nUsed = 0;
+	this->m_nAllocated = BASE_SIZE;
+}
+
+void IntegerVector::delete_at(int index)
+{
+	if (index < 0 || index >= this->m_nUsed)
+	{
+		throw std::out_of_range("Index out of bounds");
+	}
+
+	for (int i = index; i < this->m_nUsed - 1; i++)
+	{
+		this->m_data[i] = this->m_data[i + 1];
+	}
+
+	this->m_data[this->m_nUsed - 1] = 0;
+	this->m_nUsed--;
 }
 
 IntegerVector &IntegerVector::operator=(const IntegerVector &other)
@@ -124,10 +140,10 @@ IntegerVector &IntegerVector::operator=(const IntegerVector &other)
 	{
 		delete[] this->m_data;
 
-		this->n_Allocated = other.n_Allocated;
-		this->n_Used = other.n_Used;
-		this->m_data = new int[this->n_Allocated];
-		std::memcpy(this->m_data, other.m_data, other.n_Used * sizeof(int));
+		this->m_nAllocated = other.m_nAllocated;
+		this->m_nUsed = other.m_nUsed;
+		this->m_data = new int[this->m_nAllocated];
+		std::memcpy(this->m_data, other.m_data, other.m_nUsed * sizeof(int));
 	}
 
 	return *this;

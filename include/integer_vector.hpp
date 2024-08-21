@@ -6,8 +6,8 @@ class IntegerVector
 private:
 	static const int BASE_SIZE = 4;
 	int *m_data;
-	int n_Allocated;
-	int n_Used;
+	int m_nAllocated;
+	int m_nUsed;
 
 public:
 	// Constructors
@@ -30,6 +30,7 @@ public:
 	// Modifiers
 	void push_back(int value);
 	void pop_back();
+	void delete_at(int index);
 	void clear();
 	IntegerVector &operator=(const IntegerVector &other);
 };

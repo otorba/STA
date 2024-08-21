@@ -52,6 +52,48 @@ TEST(IntegerVectorTest, PushBackAndSize)
 	EXPECT_FALSE(vec.empty());
 }
 
+// Test delete_at with an empty vector
+TEST(IntegerVectorTest, DeleteAtEmptyVector)
+{
+	IntegerVector vec;
+	EXPECT_THROW(vec.delete_at(0), std::out_of_range);
+	EXPECT_EQ(vec.size(), 0);
+}
+
+// Test delete_at with the last element
+TEST(IntegerVectorTest, DeleteAtLastElement)
+{
+	IntegerVector vec;
+	vec.push_back(1);
+	vec.delete_at(0);
+	EXPECT_EQ(vec.size(), 0);
+}
+
+// Test delete_at with an invalid index
+TEST(IntegerVectorTest, DeleteAtInvalidIndex)
+{
+	IntegerVector vec;
+	vec.push_back(1);
+	EXPECT_THROW(vec.delete_at(1), std::out_of_range);
+	EXPECT_THROW(vec.delete_at(-1), std::out_of_range);
+}
+
+// Test delete_at with multiple deletions
+TEST(IntegerVectorTest, DeleteAtMultipleDeletions)
+{
+	IntegerVector vec;
+	vec.push_back(1);
+	vec.push_back(2);
+	vec.push_back(3);
+	vec.delete_at(1); // Deletes element 2
+	EXPECT_EQ(vec.size(), 2);
+	EXPECT_EQ(vec.at(0), 1);
+	EXPECT_EQ(vec.at(1), 3);
+	vec.delete_at(0); // Deletes element 1
+	EXPECT_EQ(vec.size(), 1);
+	EXPECT_EQ(vec.at(0), 3);
+}
+
 // Test growing
 TEST(IntegerVectorTest, Growing)
 {
