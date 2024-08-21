@@ -5,7 +5,7 @@
       "name": "CMake: Debug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/out/build/GCC 14.1.0 x86_64-w64-mingw32 (ucrt64)/STA.exe",
+      "program": "${workspaceFolder}/out/build/GCC 14.1.0 x86_64-w64-mingw32 (ucrt64)/main.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
