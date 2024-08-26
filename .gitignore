@@ -1,12 +1,14 @@
 # Ignore build directories
 /build/
 /out/
+/bin/
 
 # Ignore CMake generated files
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+CMakeLists.txt.user
 
 # Ignore Visual Studio files
 *.vcxproj*
@@ -37,3 +39,20 @@ Makefile
 # Ignore OS-specific files
 .DS_Store
 Thumbs.db
+
+# Ignore backup files
+*~
+*.bak
+
+# Ignore temporary files
+*.tmp
+
+# Ignore editor-specific files
+*.swp
+*.swo
+.idea/
+
+# Ignore coverage reports
+*.gcda
+*.gcno
+*.gcov
