@@ -88,7 +88,7 @@ void IntegerLinkedList::PushFront(int value)
 	}
 	else
 	{
-		node->m_pNext = this->m_pFirst->m_pNext;
+		node->m_pNext = this->m_pFirst;
 		this->m_pFirst = node;
 	}
 
@@ -202,6 +202,8 @@ void IntegerLinkedList::Clear()
 		this->m_pFirst = pNode->m_pNext;
 		delete pNode;
 	}
+	
+	this->m_Size = 0;
 }
 
 IntegerLinkedList::Node::Node(int value)
