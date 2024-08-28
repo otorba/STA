@@ -25,6 +25,7 @@ private:
 
 public:
 	IntegerLinkedList();
+	~IntegerLinkedList();
 
 	// Accessors
 	int Size() const;

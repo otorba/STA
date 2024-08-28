@@ -42,6 +42,12 @@ IntegerLinkedList::IntegerLinkedList()
 	this->m_Size = 0;
 }
 
+IntegerLinkedList::~IntegerLinkedList()
+{
+	this->Clear();
+	std::cout << "Destructor called\n";
+}
+
 // Accessors
 int IntegerLinkedList::Size() const { return this->m_Size; }
 
@@ -69,13 +75,13 @@ void IntegerLinkedList::PushBack(int value)
 	Node *node = new Node(value);
 	if (this->Empty())
 	{
-		this->m_pFirst = this->m_pLast = node;
+		this->m_pFirst = node;
 	}
 	else
 	{
 		this->m_pLast->m_pNext = node; // to get access to the next new element
-		this->m_pLast = node;
 	}
+	this->m_pLast = node;
 	this->m_Size++;
 }
 
@@ -202,8 +208,9 @@ void IntegerLinkedList::Clear()
 		this->m_pFirst = pNode->m_pNext;
 		delete pNode;
 	}
-	
+
 	this->m_Size = 0;
+	this->m_pFirst = this->m_pLast = nullptr;
 }
 
 IntegerLinkedList::Node::Node(int value)

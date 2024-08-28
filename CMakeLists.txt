@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add source files
-set(SOURCES src/integer_vector.cpp main.cpp)
+set(SOURCES src/integer_vector.cpp src/integer_linked_list.cpp main.cpp)  # Add src/integer_linked_list.cpp
 
 # Add include directories
 include_directories(include)
@@ -26,9 +26,9 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 add_executable(runTests 
                tests/test_main.cpp
                tests/test_integer_vector.cpp 
-               tests/test_integer_linked_list.cpp  # Add this line
+               tests/test_integer_linked_list.cpp
                src/integer_vector.cpp
-               src/integer_linked_list.cpp)  # Add this line
+               src/integer_linked_list.cpp)
 target_link_libraries(runTests gtest gtest_main)
 
 # Add tests
